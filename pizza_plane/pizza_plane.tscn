@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://dd24cimlwypy2"]
+
+[ext_resource type="Texture2D" uid="uid://dkildjmvllr1q" path="res://data/planegreen_0.png" id="1_cbtsh"]
+[ext_resource type="Texture2D" uid="uid://bg3hxkjpmwa4b" path="res://data/desert.png" id="1_cfl35"]
+[ext_resource type="Script" path="res://player.gd" id="1_naruh"]
+[ext_resource type="Script" path="res://enemy_timer.gd" id="3_50lpx"]
+[ext_resource type="Texture2D" uid="uid://bpj7tlsyii8qj" path="res://data/peppi.png" id="4_xgs3g"]
+[ext_resource type="Texture2D" uid="uid://ssf6ssdig3ve" path="res://data/pizza.png" id="5_vc21c"]
+[ext_resource type="Texture2D" uid="uid://347goqiefshd" path="res://data/pumpkin.png" id="6_da6hu"]
+[ext_resource type="Texture2D" uid="uid://b8e8hy0jf8dly" path="res://data/tomato.png" id="7_yncmv"]
+[ext_resource type="Texture2D" uid="uid://3cd3v3g5qypo" path="res://data/meloni.png" id="8_i4h02"]
+
+[node name="pizza_plane" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(832, 260)
+texture = ExtResource("1_cfl35")
+
+[node name="gameWorld" type="Node2D" parent="."]
+
+[node name="player" type="Area2D" parent="."]
+position = Vector2(140, 300)
+script = ExtResource("1_naruh")
+
+[node name="planegreen0" type="Sprite2D" parent="player"]
+position = Vector2(1, 0)
+texture = ExtResource("1_cbtsh")
+
+[node name="enemy_timer" type="Timer" parent="." node_paths=PackedStringArray("gameWorld")]
+wait_time = 0.578
+autostart = true
+script = ExtResource("3_50lpx")
+gameWorld = NodePath("../gameWorld")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="enemy_timer"]
+visible = false
+
+[node name="Peppi" type="Sprite2D" parent="enemy_timer/RigidBody2D"]
+texture = ExtResource("4_xgs3g")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="enemy_timer"]
+visible = false
+
+[node name="Pizza" type="Sprite2D" parent="enemy_timer/RigidBody2D2"]
+texture = ExtResource("5_vc21c")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="enemy_timer"]
+visible = false
+
+[node name="Pumpkin" type="Sprite2D" parent="enemy_timer/RigidBody2D3"]
+texture = ExtResource("6_da6hu")
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="enemy_timer"]
+visible = false
+
+[node name="Tomato" type="Sprite2D" parent="enemy_timer/RigidBody2D4"]
+texture = ExtResource("7_yncmv")
+
+[node name="RigidBody2D5" type="RigidBody2D" parent="enemy_timer"]
+visible = false
+
+[node name="Meloni" type="Sprite2D" parent="enemy_timer/RigidBody2D5"]
+texture = ExtResource("8_i4h02")
+
+[connection signal="timeout" from="enemy_timer" to="enemy_timer" method="_on_timeout"]
